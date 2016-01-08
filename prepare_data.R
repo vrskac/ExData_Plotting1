@@ -84,6 +84,12 @@ prepare_data <- function(regenerate_subset_file = FALSE) {
             )
         )
     
+    # Create a new variable that combines the date and time.
+    datetime <- with(dat, as.POSIXct(paste(date, time), format = "%Y-%m-%d %H:%M:%S"))
+    
+    # Bind the new variable on the left of the existing.
+    dat <- cbind(datetime, dat)
+    
     # Convert date variable character class to POSIXct.
     dat$date <- ymd(dat$date)
     
